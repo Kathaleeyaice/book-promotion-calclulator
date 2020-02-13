@@ -28,16 +28,9 @@
           รายการสั่งซื้อ
         </div>
         <div>รวม {{ bookTotal }} เล่ม</div>
-        <div>
-          ราคารวม....บาท
-        </div>
-        <div>
-          ส่วนลด....บาท
-        </div>
-        <div>
-          ราคาสุทธิ....บาท
-        </div>
-        <button>คำนวณ</button>
+        <div>ราคารวม {{ priceTotal }} บาท</div>
+        <div>ส่วนลด {{ discount }} บาท</div>
+        <div>ราคาสุทธิ {{ priceFinal }} บาท</div>
       </div>
     </div>
   </div>
@@ -106,7 +99,10 @@ export default {
           selectedNum: 0
         }
       ],
-      bookTotal: 0
+      bookTotal: 0,
+      priceTotal: 0,
+      discount: 10,
+      priceFinal: 0
     };
   },
   components: {},
@@ -114,12 +110,26 @@ export default {
     selectedIncrease(id) {
       this.bookList[id - 1].selectedNum += 1;
       this.bookTotal += 1;
+      this.findTotalPrice();
+      this.findPriceFinal();
     },
     selectedDecrease(id) {
       if (this.bookList[id - 1].selectedNum > 0) {
         this.bookList[id - 1].selectedNum -= 1;
         this.bookTotal -= 1;
+        this.findTotalPrice();
+        this.findPriceFinal();
       }
+    },
+    findTotalPrice() {
+      this.priceTotal = 0;
+      for (let i = 0; i < this.bookList.length; i++) {
+        this.priceTotal +=
+          this.bookList[i].selectedNum * this.bookList[i].price;
+      }
+    },
+    findPriceFinal() {
+      this.priceFinal = this.priceTotal - this.discount;
     }
   }
 };
