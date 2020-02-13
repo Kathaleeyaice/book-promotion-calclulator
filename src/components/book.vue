@@ -1,14 +1,14 @@
 <template>
   <div class="book">
     <div class="bookBox">
-      <div class="bookImg"></div>
+      <div class="bookImg">
+        <img :src="bookData.image" />
+      </div>
       <div class="bookName">
-        แฮรี่ พอตเตอร์กับศิลาอาถรรพ์
+        {{ bookData.name }}
       </div>
       <div class="bookBoxRight">
-        <div class="bookPrice">
-          ราคา
-        </div>
+        <div class="bookPrice">ราคา {{ bookData.price }}</div>
         <div class="bookNumber">
           จำนวน
           <input type="number" />
@@ -22,7 +22,9 @@
 <script>
 export default {
   name: "book",
-  props: {}
+  props: {
+    bookData: Object
+  }
 };
 </script>
 
@@ -34,12 +36,14 @@ export default {
   border: solid;
 }
 .bookImg {
-  width: 120px;
-  height: 150px;
-  background-color: antiquewhite;
   margin: 5px 35px 5px 35px;
 }
+img {
+  width: 120px;
+  height: 150px;
+}
 .bookName {
+  width: 260px;
   margin: 5px 35px 5px 35px;
 }
 .bookBoxRight {
