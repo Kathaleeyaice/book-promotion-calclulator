@@ -101,7 +101,7 @@ export default {
       ],
       bookTotal: 0,
       priceTotal: 0,
-      discount: 10,
+      discount: 0,
       priceFinal: 0
     };
   },
@@ -112,6 +112,7 @@ export default {
       this.bookTotal += 1;
       this.findTotalPrice();
       this.findPriceFinal();
+      this.findDiscount();
     },
     selectedDecrease(id) {
       if (this.bookList[id - 1].selectedNum > 0) {
@@ -119,6 +120,7 @@ export default {
         this.bookTotal -= 1;
         this.findTotalPrice();
         this.findPriceFinal();
+        this.findDiscount();
       }
     },
     findTotalPrice() {
@@ -130,6 +132,44 @@ export default {
     },
     findPriceFinal() {
       this.priceFinal = this.priceTotal - this.discount;
+    },
+    findDiscount() {
+      this.discount = 0;
+      let bookIDList = this.createBookIDList();
+      let uniqeIDGroup = [];
+      let bookIDListLength = bookIDList.length; // for constant length in loop
+      for (let i = 0; i < bookIDListLength; i++) {
+        let group = Array.from(new Set(bookIDList)); // create uniqe id group
+        uniqeIDGroup.push(group);
+        for (let j = 0; j < group.length; j++) {
+          for (let k = 0; k < bookIDList.length; k++) {
+            if (bookIDList[k] == group[j]) {
+              bookIDList.splice(k, 1); // remove 1 element in index k
+              break;
+            }
+          }
+        }
+      }
+      for (let i = 0; i < uniqeIDGroup.length; i++) {
+        if (uniqeIDGroup[i].length > 1) {
+          for (let j = 0; j < uniqeIDGroup[i].length; j++) {
+            let bookID = uniqeIDGroup[i][j] - 1;
+            let discountPercent = (uniqeIDGroup[i].length - 1) * 10;
+            let discount =
+              (this.bookList[bookID].price * discountPercent) / 100;
+            this.discount += discount;
+          }
+        }
+      }
+    },
+    createBookIDList() {
+      let bookIDList = [];
+      for (let i = 0; i < this.bookList.length; i++) {
+        for (let j = 0; j < this.bookList[i].selectedNum; j++) {
+          bookIDList.push(this.bookList[i].id);
+        }
+      }
+      return bookIDList;
     }
   }
 };
