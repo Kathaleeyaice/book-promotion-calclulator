@@ -1,5 +1,13 @@
 <template>
   <div id="app">
+    <div class="navBar">
+      <div>
+        <img src="./assets/bookstore.png" id="iconBookStore" />
+      </div>
+      <div class="bookStoreName">
+        บ้านนายดิน
+      </div>
+    </div>
     <div class="bookAll">
       <div v-for="bookData in bookList" :key="bookData.id">
         <div class="bookBox">
@@ -24,8 +32,11 @@
     </div>
     <div class="orderAll">
       <div>
-        <div>
+        <div id="order">
           รายการสั่งซื้อ
+          <div>
+            <img src="./assets/cart.png" id="iconCart" />
+          </div>
         </div>
         <div>รวม {{ bookTotal }} เล่ม</div>
         <div>ราคารวม {{ priceTotal }} บาท</div>
@@ -44,7 +55,7 @@ export default {
       bookList: [
         {
           id: 1,
-          name: "แฮรี่ พอตเตอร์กับศิลาอาถรรพ์",
+          name: "แฮร์รี่ พอตเตอร์กับศิลาอาถรรพ์",
           image:
             "https://upload.wikimedia.org/wikipedia/th/thumb/a/a2/Hp_ps_thai.jpg/330px-Hp_ps_thai.jpg",
           price: 100,
@@ -176,32 +187,98 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Kanit&display=swap");
+body {
+  font-family: "Kanit", sans-serif;
+  background-color: #f8f8f8;
+}
 #app {
   display: inline-flex;
+  width: 100%;
+}
+.navBar {
+  width: 100vw;
+  height: 5vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: inline-flex;
+  background-color: #20639b;
+  box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.25);
+}
+#iconBookStore {
+  width: 3.32667997339vw;
+  height: 3.32667997339vw;
+  margin: 0.66533599467vw 0 0.66533599467vw 2.32867598137vw;
+}
+.bookStoreName {
+  color: #f8f8f8;
+  font-size: 1.19760479042vw;
+  font-weight: bold;
+  margin: 1.66333998669vw 0 1.66333998669vw 0.66533599467vw;
 }
 .bookAll {
   display: inline-block;
-}
-.book {
-  display: inline-block;
+  width: 50%;
+  margin-top: 5vw;
+  margin-left: 10vw;
 }
 .bookBox {
   display: inline-flex;
-  width: auto;
-  border: solid;
+  width: 100%;
+  border: none;
+  margin: auto;
+  margin-top: 2%;
+  box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0.3992015968vw;
 }
 .bookImg {
-  margin: 5px 35px 5px 35px;
+  margin: 0.33266799733vw 2.66134397871vw 0.33266799733vw 2.66134397871vw;
 }
 img {
-  width: 120px;
-  height: 150px;
+  width: 7.98403193613vw;
+  height: 9.98003992016vw;
 }
 .bookName {
-  width: 260px;
-  margin: 5px 35px 5px 35px;
+  width: 20.29vw;
+  font-size: 1.06vw;
+  margin: 0.66vw 0 0 2.328vw;
 }
 .bookBoxRight {
-  margin: 5px 35px 5px 35px;
+  width: 9.98003992016vw;
+  margin: 0.66vw 2.66vw 0.332vw 2.66vw;
+}
+button {
+  background-color: #20639b;
+  color: #f8f8f8;
+  border: none;
+  width: 20px;
+  text-align: center;
+}
+button:hover {
+  cursor: pointer;
+}
+.orderAll {
+  width: 15%;
+  height: 10.97vw;
+  box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0.3992015968vw;
+  margin-top: 6vw;
+  background-color: #20639b;
+  color: #f8f8f8;
+  padding: 1.996vw 0 0 6.653vw;
+  position: fixed;
+  right: 10vw;
+}
+#order {
+  font-size: 1.197vw;
+  display: inline-flex;
+}
+#iconCart {
+  width: 1.99600798403vw;
+  height: 1.99600798403vw;
+  margin-left: 0.33266799733vw;
 }
 </style>
